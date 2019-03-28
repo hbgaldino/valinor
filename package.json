@@ -9,7 +9,8 @@
   },
   "author": "Higor Eduardo Borges Galdino",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongodb": "^3.2.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
