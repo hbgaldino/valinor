@@ -1,5 +1,5 @@
 {
-  "name": "videogame-api",
+  "name": "bus-schedules-api",
   "version": "1.0.0",
   "description": "Video Game API using GraphQL",
   "main": "server.js",
