@@ -1,0 +1,17 @@
+{
+  "name": "videogame-api",
+  "version": "1.0.0",
+  "description": "Video Game API using GraphQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Higor Eduardo Borges Galdino",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
