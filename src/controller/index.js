@@ -1,9 +1,15 @@
 import mongoose from 'mongoose';
 import ScheduleModel from '../model/schedule';
 
-const getSchedules = (req, res, next) => {
-  res.sendStatus(200);
-  next();
+const getSchedules = (req, res) => {
+
+  ScheduleModel.find()
+    .select('_id name schedule active')
+    .then((list) => {
+      return res.status(200).json({
+        schedules: list
+      });
+    });
 };
 
 const getSchedule = (req, res, next) => {
@@ -22,7 +28,7 @@ const postSchedule = (req, res) => {
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     active: req.body.active,
-    schedules: req.body.schedules
+    schedule: req.body.schedule
   });
 
   return schedule

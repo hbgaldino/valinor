@@ -8,7 +8,7 @@ var schema = new Schema({
   name: String,
   active: Boolean,
   updated: { type: Date, default: Date.now() },
-  schedules: { type: Date }
+  schedule: { type: Date, required: true }
 });
 
 export default mongoose.model('ScheduleModel', schema);
