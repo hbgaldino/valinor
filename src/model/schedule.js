@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
 mongoose.Promise = global.Promise;
+const Schema = mongoose.Schema;
 
 var schema = new Schema({
   _id: Schema.Types.ObjectId,
@@ -11,4 +11,4 @@ var schema = new Schema({
   schedules: { type: Date }
 });
 
-module.exports = mongoose.model('ScheduleModel', schema);
+export default mongoose.model('ScheduleModel', schema);

@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express';
+import { getSchedule, getSchedules, deleteSchedule, postSchedule, putSchedule, patchSchedule } from '../controller';
+
 const router = express.Router();
-const busController = require("../controller");
 
-router.get("/schedules", busController.getSchedules);
-router.get("/schedules/:id", busController.getSchedule);
-router.delete('/schedules/:id', busController.deleteSchedule);
-router.post("/schedules", busController.postSchedule);
-router.put("/schedules/:id", busController.putSchedule);
-router.patch("/schedules/:id", busController.patchSchedule);
+router.get("/schedules", getSchedules);
+router.get("/schedules/:id", getSchedule);
+router.delete('/schedules/:id', deleteSchedule);
+router.post("/schedules", postSchedule);
+router.put("/schedules/:id", putSchedule);
+router.patch("/schedules/:id", patchSchedule);
 
-module.exports = router;
+export default router;

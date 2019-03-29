@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var ScheduleModel = require('../db/schedule-model');
+import mongoose from 'mongoose';
+import ScheduleModel from '../model/schedule';
 
 const getSchedules = (req, res, next) => {
   res.sendStatus(200);
@@ -49,7 +49,7 @@ const patchSchedule = (req, res, next) => {
 };
 
 
-module.exports = { 
+export {
   getSchedules,
   getSchedule,
   deleteSchedule,

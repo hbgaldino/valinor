@@ -1,13 +1,16 @@
-var express = require('express');
-var routes = require("./src/routes");
-var db = require("./src/db");
-var bodyParser = require('body-parser');
+import express from 'express';
+import routes from './src/routes';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
-app = express()
+
+mongoose.connect('mongodb://localhost/bus-schedules', {useNewUrlParser: true})
+  .then(() => console.log("Sucessfuly connected to mongodb"));
+
+const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.use('/api', routes);
-
 app.listen(3000, () => console.log('Server started in port 3000'));
