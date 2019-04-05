@@ -1,65 +1,51 @@
-import mongoose from 'mongoose';
 import ScheduleModel from '../model/schedule';
 
-const getSchedules = (req, res) => {
+export const getSchedules = async (req, res) => {
 
-  ScheduleModel.find()
-    .then((list) => {
-      return res.status(200).json({
-        schedules: list
-      });
-    });
+  try {
+      const total = await ScheduleModel.countDocuments();
+      const list = await ScheduleModel.find();
+
+      return res.status(200).json({total: total, schedules: list});
+  } catch (err) {
+      console.log(err);
+  }
 };
 
-const getSchedule = (req, res) => {
+export const getSchedule = (req, res) => {
   ScheduleModel.findOne({id: req.id, active: true}).then((response) => {
     return res.status(200).json(response);
   });
 };
 
-const deleteSchedule = (req, res, next) => {
+export const deleteSchedule = (req, res, next) => {
   res.sendStatus(200);
   next();
 };
 
-const postSchedule = (req, res) => {
-
-  const schedule = new ScheduleModel({
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    active: req.body.active,
-    schedule: req.body.schedule
-  });
+export const postSchedule = (req, res, next) => {
+  const schedule = new ScheduleModel(req.body);
 
   return schedule
     .save()
     .then((newSchedule) => {
       return res.status(201).json(newSchedule);
     })
-    .catch((error) => {
-      res.status(500).json({
-        error: 'Server error. Try again',
-        description: error.message
-      });
+    .catch((err) => {
+      if(err.name === 'ValidationError') {
+        return res.status(400).json({code: err.name, message: err.message});
+      } 
+
+      next(err);
     });
 };
 
-const putSchedule = (req, res, next) => {
+export const putSchedule = (req, res, next) => {
   res.sendStatus(200);
   next();
 };
 
-const patchSchedule = (req, res, next) => {
+export const patchSchedule = (req, res, next) => {
   res.sendStatus(200);
   next();
 };
-
-
-export {
-  getSchedules,
-  getSchedule,
-  deleteSchedule,
-  postSchedule,
-  putSchedule,
-  patchSchedule
-}
