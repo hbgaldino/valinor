@@ -4,7 +4,6 @@ import ScheduleModel from '../model/schedule';
 const getSchedules = (req, res) => {
 
   ScheduleModel.find()
-    .select('_id name schedule active')
     .then((list) => {
       return res.status(200).json({
         schedules: list
@@ -12,9 +11,10 @@ const getSchedules = (req, res) => {
     });
 };
 
-const getSchedule = (req, res, next) => {
-  res.sendStatus(200);
-  next();
+const getSchedule = (req, res) => {
+  ScheduleModel.findOne({id: req.id, active: true}).then((response) => {
+    return res.status(200).json(response);
+  });
 };
 
 const deleteSchedule = (req, res, next) => {
