@@ -42,11 +42,16 @@ export const getSchedule = async (req, res, next) => {
 };
 
 export const deleteSchedule = async (req, res, next) => {
-  
+  console.info(`DELETE Schedule :id ${req.params.id}`);
+
   try {
-    const resp = await ScheduleModel.findOneAndDelete({_id: req.params.id});
-    console.info(`delete: ${resp}`);
-    res.sendStatus(200);
+    const deleted = await ScheduleModel.findOneAndDelete({_id: req.params.id});
+
+
+    if (deleted)
+      res.status(200).json(deleted);
+    else
+      res.sendStatus(204);
 
   } catch(err) {
     next(err);
@@ -54,6 +59,7 @@ export const deleteSchedule = async (req, res, next) => {
 };
 
 export const postSchedule = (req, res, next) => {
+  console.info(`POST Schedule`);
   const schedule = new ScheduleModel(req.body);
 
   return schedule
