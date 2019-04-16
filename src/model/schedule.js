@@ -4,9 +4,9 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 var subSchema = new Schema({
-  _id: {type: Schema.ObjectId, auto: true},
+  _id: {type: Schema.ObjectId, auto: true, unique: true},
   dateTime: { type: Date , required: true},
-  status: { type: String, enum: {values: ['DELAYED', 'ONTIME', 'CANCELED'], message: "Only permitted status in: 'DELAYED', 'ONTIME', 'CANCELED'}"}}
+  status: { type: String, required:true, enum: {values: ['DELAYED', 'ONTIME', 'CANCELED'], message: "Only permitted status in: 'DELAYED', 'ONTIME', 'CANCELED'}"}}
 });
 
 var schema = new Schema({

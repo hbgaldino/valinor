@@ -26,10 +26,7 @@ export const getSchedule = async (req, res, next) => {
   try {
     console.info(`GET Schedule :id ${req.params.id}`);
     
-    const item = await ScheduleModel.findOne({
-      _id: req.params.id,
-      active: true
-    }, '_id name schedules updated');
+    const item = await ScheduleModel.findOne({ _id: req.params.id });
 
     if(item) {
       return res.status(200).json(item);  
@@ -80,11 +77,19 @@ export const postSchedule = (req, res, next) => {
 };
 
 export const putSchedule = (req, res, next) => {
-  res.sendStatus(200);
-  next();
+  ScheduleModel.findOneAndUpdate({_id: req.params.id}, req.body, { new:true, runValidators:true }, function (err, resp) {
+    if(err) {
+      next(err);
+    }
+    res.status(200).json(resp);
+  });
 };
 
 export const patchSchedule = (req, res, next) => {
-  res.sendStatus(200);
-  next();
+  ScheduleModel.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, { new:true, runValidators: true }, function (err, resp) {
+    if(err) {
+      next(err);
+    }
+    res.status(200).json(resp);
+  });
 };
